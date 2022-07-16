@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\customer;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+use Symfony\Component\HttpFoundation\Response;
 
 class CustomerController extends Controller
 {
@@ -14,7 +16,12 @@ class CustomerController extends Controller
      */
     public function index()
     {
-        //
+        $customer = customer::all();
+
+        return response()->json([
+            "message" => "all customers",
+            "data" => $customer
+        ],Response::HTTP_OK);
     }
 
     /**
@@ -25,7 +32,25 @@ class CustomerController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(),[
+            'kode' => 'requied|unique:customers',
+            'nama' => 'required',
+            'telp' => 'required'
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                "message" => "fail",
+                "error" => $validator->errors()
+            ]);   
+        }else {
+            $customer = customer::create($request->all());
+
+            return response()->json([
+                "message" => "data created",
+                "data" => $customer
+            ]);
+        }
     }
 
     /**
@@ -34,9 +59,18 @@ class CustomerController extends Controller
      * @param  \App\Models\customer  $customer
      * @return \Illuminate\Http\Response
      */
-    public function show(customer $customer)
+    public function show($id)
     {
-        //
+        $customer = customer::findOrFail($id);
+        if (!$customer) {
+            return response()->json([
+                "message" => "barang tidak ditemukan"
+            ],Response::HTTP_NOT_FOUND);   
+        }
+        return response()->json([
+            "message" => "data $customer->nama",
+            "data" => $customer
+        ]);
     }
 
     /**
@@ -46,9 +80,29 @@ class CustomerController extends Controller
      * @param  \App\Models\customer  $customer
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, customer $customer)
+    public function update(Request $request,$id)
     {
-        //
+        $customer = customer::findOrfail($id);
+        if (!$customer) {
+            return response()->json([
+                "message" => "barang tidak ditemukan"
+            ],Response::HTTP_NOT_FOUND);   
+        }
+        else {
+            $validator = Validator::make($request->all(),[
+                'nama' => 'required',
+                'telp' => 'required'
+            ]);
+    
+            if ($validator->fails()) {
+                return response()->json([
+                    "message" => "fail",
+                    "error" => $validator->errors()
+                ]);
+            }else {
+                $customer->update($request->all());
+            }
+        }
     }
 
     /**
@@ -57,8 +111,19 @@ class CustomerController extends Controller
      * @param  \App\Models\customer  $customer
      * @return \Illuminate\Http\Response
      */
-    public function destroy(customer $customer)
+    public function destroy($id)
     {
-        //
+        $customer = customer::findOrfail($id);
+
+        if (!$customer) {
+            return response()->json([
+                "message" => "barang tidak ditemukan"
+            ],Response::HTTP_NOT_FOUND);   
+        }else {
+            $customer->delete();
+            return response()->json([
+                "message" => "data deleted"
+            ]);
+        }
     }
 }

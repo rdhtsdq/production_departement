@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BarangController;
+use App\Http\Controllers\CustomerController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -33,9 +34,20 @@ Route::group(['middleware' => 'auth:sanctum'], function (){
     Route::get('/products',[BarangController::class,'index']);
     Route::post('/products',[BarangController::class,'store']);
     Route::get('/products/{id}',[BarangController::class,'show']);
-    Route::patch('/products/{id}',[BarangController::class,'update']);
+    Route::put('/products/{id}',[BarangController::class,'update']);
     Route::delete('/products/{id}',[BarangController::class,'destroy']);
+
+    // route for customers
+    Route::get('/customers',[CustomerController::class,'index']);
+    Route::post('/customers',[CustomerController::class,'store']);
+    Route::get('/customers/{id}',[CustomerController::class,'show']);
+    Route::put('/customers/{id}',[CustomerController::class,'update']);
+    Route::delete('/customers/{id}',[CustomerController::class,'destroy']);
     
+    // route for sales
+
+
+    // route for sales_detail
 
     // route for logout
     Route::post('/logout',[AuthController::class,'Logout']);
