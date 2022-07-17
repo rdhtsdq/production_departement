@@ -3,6 +3,8 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BarangController;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\salesController;
+use App\Http\Controllers\salesDetailController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -34,20 +36,30 @@ Route::group(['middleware' => 'auth:sanctum'], function (){
     Route::get('/products',[BarangController::class,'index']);
     Route::post('/products',[BarangController::class,'store']);
     Route::get('/products/{id}',[BarangController::class,'show']);
-    Route::put('/products/{id}',[BarangController::class,'update']);
+    Route::patch('/products/{id}',[BarangController::class,'update']);
     Route::delete('/products/{id}',[BarangController::class,'destroy']);
 
     // route for customers
     Route::get('/customers',[CustomerController::class,'index']);
     Route::post('/customers',[CustomerController::class,'store']);
     Route::get('/customers/{id}',[CustomerController::class,'show']);
-    Route::put('/customers/{id}',[CustomerController::class,'update']);
+    Route::patch('/customers/{id}',[CustomerController::class,'update']);
     Route::delete('/customers/{id}',[CustomerController::class,'destroy']);
     
     // route for sales
-
+    Route::get('/sales',[salesController::class,'index']);
+    Route::post('/sales',[salesController::class,'store']);
+    Route::get('/sales/{id}',[salesController::class,'show']);
+    Route::patch('/sales/{id}',[salesController::class,'update']);
+    Route::delete('/sales/{id}',[salesController::class,'destroy']);
 
     // route for sales_detail
+
+    Route::get('/sales_detail',[salesDetailController::class,'index']);
+    Route::post('/sales_detail',[salesDetailController::class,'store']);
+    Route::get('/sales_detail/{id}',[salesDetailController::class,'show']);
+    Route::patch('/sales_detail/{id}',[salesDetailController::class,'update']);
+    Route::delete('/sales_detail/{id}',[salesDetailController::class,'destroy']);
 
     // route for logout
     Route::post('/logout',[AuthController::class,'Logout']);

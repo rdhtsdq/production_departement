@@ -33,7 +33,7 @@ class CustomerController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(),[
-            'kode' => 'requied|unique:customers',
+            'kode' => 'required|unique:customers',
             'nama' => 'required',
             'telp' => 'required'
         ]);
@@ -101,6 +101,11 @@ class CustomerController extends Controller
                 ]);
             }else {
                 $customer->update($request->all());
+
+                return response()->json([
+                    "message" => "data berhasil diubah",
+                    "data" => $customer
+                ],200);
             }
         }
     }

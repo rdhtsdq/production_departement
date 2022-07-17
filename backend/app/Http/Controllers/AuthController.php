@@ -41,12 +41,17 @@ class AuthController extends Controller
 
     public function Login(Request $request)
     {
+        $validator = Validator::make($request->all(),[
+            'email' => "required",
+            "password" => "required"
+        ]);
+
         if (!Auth::attempt($request->only('email','password'))) {
             return response()->json([
                 "message" => 'unauthorized'
             ],401);
-
-        $user = User::where('email',$request['email'])->firstOrFail();
+        }else {
+            $user = User::where('email',$request['email'])->firstOrFail();
 
         $token = $user->createToken('auth_token')->plainTextToken;
 
@@ -54,7 +59,7 @@ class AuthController extends Controller
             "message" => "hi ".$user->name,
             'access_token' => $token,
             "token_type" => "Bearer"
-        ]);
+        ],200);
         }
     }
 
