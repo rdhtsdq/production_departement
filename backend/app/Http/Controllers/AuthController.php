@@ -20,7 +20,8 @@ class AuthController extends Controller
         if ($validator->fails()) {
             return response()->json([
                 "message" => "fail",
-                "error" => $validator->errors()
+                "error" => $validator->errors(),
+                "auth" => false
             ]);
         }
 
@@ -35,7 +36,8 @@ class AuthController extends Controller
         return response()->json([
             "message" => "user created",
             'access_token' => $token,
-            'token_type' => "Bearer"
+            'token_type' => "Bearer",
+            "auth" => true
         ]);
     }
 
@@ -48,7 +50,9 @@ class AuthController extends Controller
 
         if (!Auth::attempt($request->only('email','password'))) {
             return response()->json([
-                "message" => 'unauthorized'
+                "message" => 'unauthorized',
+                "error" => ["email or password fail"],
+                "auth" => false
             ]);
         }else {
             $user = User::where('email',$request['email'])->firstOrFail();
@@ -58,7 +62,8 @@ class AuthController extends Controller
         return response()->json([
             "message" => "hi ".$user->name,
             'access_token' => $token,
-            "token_type" => "Bearer"
+            "token_type" => "Bearer",
+            "auth" => true
         ],200);
         }
     }
@@ -66,5 +71,9 @@ class AuthController extends Controller
     public function Logout()
     {
         auth()->user()->tokens()->delete();
+        return response()->json([
+            "message" => "goodbye",
+            "auth" => false
+        ]);
     }
 }
