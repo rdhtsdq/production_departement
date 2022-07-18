@@ -1,0 +1,18 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Edu+NSW+ACT+Foundation:wght@400;500;600;700&display=swap');
+
+@layer components{
+  .input{
+    @apply px-4 py-2 rounded-lg border md:px-8 md:py-3
+  }
+  .btn {
+    @apply px-4 py-2 rounded-lg 
+  }
+
+  .logo {
+    font-family:'Edu NSW ACT Foundation', cursive;
+  }
+}
