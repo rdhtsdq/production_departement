@@ -1,10 +1,13 @@
+import instance from '../api'
+import {useSelector} from 'react-redux'
+import { useState,useEffect } from 'react'
+
 const DaftarTransaksi = ({data}) => {
   return <div className="space-y-5 bg-blue-50 h-full p-5">
     <div className="flex items-center h-[5vh] w-full justify-between">
-      <h1 className="mb-3 font-semibold">Daftar Transaksi</h1>
+      <h1 className="mb-3 font-semibold text-xl">Daftar Transaksi</h1>
       <form className="divide-x-2">
-        <input type="text" className="px-1 py-1 w-[40vw] md:w-[20vw] md:px-4 md: md:py-1 rounded-l-lg" placeholder="Cari.."/>
-        <button className="bg-white px-3 py-1 rounded-r-lg">x</button>
+        <input type="text" className="px-1 py-1 w-[40vw] md:w-[20vw] md:px-4 md: md:py-1 rounded-lg" placeholder="Cari.."/>
       </form>
     </div>
     <div className="overflow-auto rounded-lg shadow">

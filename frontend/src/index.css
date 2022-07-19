@@ -6,7 +6,7 @@
 
 @layer components{
   .input{
-    @apply px-4 py-2 rounded-lg border md:px-8 md:py-3
+    @apply px-4 py-1 rounded-lg border md:px-8 md:py-3
   }
   .btn {
     @apply px-4 py-2 rounded-lg 
@@ -14,5 +14,15 @@
 
   .logo {
     font-family:'Edu NSW ACT Foundation', cursive;
+  }
+
+  .form-input {
+    @apply flex space-x-2 items-center
+  }
+  .form {
+    @apply space-y-3 mb-3
+  }
+  .form-section-title {
+    @apply px-4 py-2 bg-blue-100 mb-4
   }
 }

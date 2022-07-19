@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { BrowserRouter } from 'react-router-dom'; 
 
 // redux store
 import {configureStore} from '@reduxjs/toolkit'
@@ -10,20 +11,25 @@ import { Provider } from 'react-redux';
 
 
 import LoginStore from './store/LoginStore';
+import SalesStore from './store/SalesStore';
 
 const store = configureStore({
   reducer :{
-    login:LoginStore
+    login:LoginStore,
+    sales:SalesStore
   }
 })
 
+// react-router
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      <App />
+      <BrowserRouter >
+        <App />
+      </BrowserRouter>
     </Provider>
   </React.StrictMode>
 );

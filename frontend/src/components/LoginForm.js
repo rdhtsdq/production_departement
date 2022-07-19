@@ -17,8 +17,10 @@ const LoginForm = ({isOpen}) => {
     const data = await {email,password}
     const result = await axios.post('http://127.0.0.1:8000/api/login',data)
     const token = result.data.access_token
-    if (token) {
-      dispatch(login(token))
+    const auth = result.data.auth
+    const isAuth = {token,auth}
+    if (token && auth) {
+      dispatch(login(isAuth))
       navigate("/dashboard")
     }else{
       await setError(() => result.data.message)
