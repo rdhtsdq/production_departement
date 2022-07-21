@@ -3,8 +3,10 @@ import { useSelector,useDispatch } from 'react-redux'
 import {NavLink} from 'react-router-dom'
 import instance from '../api'
 import { useNavigate } from 'react-router-dom'
+import { logout } from '../store/LoginStore'
 
 const SideBar = () => {
+  const dispatch = useDispatch(logout())
   const navigate = useNavigate()
   const Active = ({isActive}) => {
     let classname = ''
@@ -15,18 +17,34 @@ const SideBar = () => {
     }
   }
   const select = useSelector(state => state.login)
-  console.log(select.value)
-  const handleLogout = async(e) => {
-    e.preventDefault()
-    const logout = await instance({
+  let headers = {}
+  const localStoragetoken = window.localStorage.getItem('token')
+  const token = localStoragetoken.slice(0,(localStoragetoken.length - 1)).replace("\"",'')
+  if (select.value.token) {
+     headers = {
+      Authorization:token
+    }
+    
+  }else{
+    headers = {
+      Authorization:token        
+    }
+  }
+
+  const LogoutRequest =async () => {
+    await instance({
       url:"/logout",
       method:"post",
       headers:{
-        Authorization:`Bearer ${select.value.token}`
+        Authorization:token
       }
-    }).then(() => {
-      navigate("/login")
-    }).catch((e) => console.error(e))
+    })
+  }
+  const handleLogout = async(e) => {
+    e.preventDefault()
+    LogoutRequest()
+    dispatch(logout())
+    navigate('/login')
   }
 
   return <nav className="hidden md:flex flex-col p-5 space-y-3 justify-between w-[15vw] h-full bg-blue-500 text-white">

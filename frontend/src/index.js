@@ -12,11 +12,15 @@ import { Provider } from 'react-redux';
 
 import LoginStore from './store/LoginStore';
 import SalesStore from './store/SalesStore';
+import CustomerStore from './store/CustomerStore';
+import Cust_id from './store/Customer_id';
 
 const store = configureStore({
   reducer :{
     login:LoginStore,
-    sales:SalesStore
+    sales:SalesStore,
+    customer:CustomerStore,
+    cust_id:Cust_id
   }
 })
 

@@ -37,7 +37,7 @@ const LoginForm = ({isOpen}) => {
         <button className="btn bg-blue-500 text-white">Login</button>
       </form>
       {/* <RegisterForm /> */}
-      <button className="my-3 text-sm text-gray-400 hover:text-gray-800" onClick={()=>isOpen(true)}>Register</button>
+      <button type="submit" className="my-3 text-sm text-gray-400 hover:text-gray-800" onClick={()=>isOpen(true)}>Register</button>
     </div>
   </div>
 }
