@@ -15,7 +15,7 @@ const Customers = ({isClose}) => {
 
   useEffect(() => {
     return async() => {
-      await axios.get('http://127.0.0.1:8000/api/customers',{headers:{Authorization:token}})
+      await axios.get('http://127.0.0.1:8000/api/customers',{headers:{Authorization:'Bearer '+token}})
       .then((result) => {
         setCust(result.data.data)
       })

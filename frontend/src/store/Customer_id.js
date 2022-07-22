@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialValue = {value:{nama:'',kode:'',telp:''}}
+const initialValue = {value:{nama:'',kode:'',telp:'',id:''}}
 
 const Cust_id = createSlice({
   name:"cust_id",
@@ -10,6 +10,7 @@ const Cust_id = createSlice({
       state.value.nama = action.payload.nama
       state.value.kode = action.payload.kode
       state.value.telp = action.payload.telp
+      state.value.id = action.payload.id
     },
     reset_cust:(state) => {
       state.value = initialValue

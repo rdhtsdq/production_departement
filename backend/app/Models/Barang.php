@@ -9,4 +9,9 @@ class Barang extends Model
 {
     use HasFactory;
     protected $fillable = ['nama','harga','kode'];
+
+    public function sales_detal()
+    {  
+       return $this->hasMany(sales_detail::class); 
+    }
 }

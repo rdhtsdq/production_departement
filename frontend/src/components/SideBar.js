@@ -1,4 +1,3 @@
-// import axios from 'axios'
 import { useSelector,useDispatch } from 'react-redux'
 import {NavLink} from 'react-router-dom'
 import instance from '../api'
@@ -16,28 +15,11 @@ const SideBar = () => {
       return 'pl-2'
     }
   }
-  const select = useSelector(state => state.login)
-  let headers = {}
-  const localStoragetoken = window.localStorage.getItem('token')
-  const token = localStoragetoken.slice(0,(localStoragetoken.length - 1)).replace("\"",'')
-  if (select.value.token) {
-     headers = {
-      Authorization:token
-    }
-    
-  }else{
-    headers = {
-      Authorization:token        
-    }
-  }
 
   const LogoutRequest =async () => {
     await instance({
       url:"/logout",
       method:"post",
-      headers:{
-        Authorization:token
-      }
     })
   }
   const handleLogout = async(e) => {

@@ -1,5 +1,6 @@
-import axios from "axios"
+
 import { useState,useEffect } from "react"
+import instance from "../api"
 import token from "../LocalToken"
 import RandomString from "../store/RandomString"
 import Alert from "./Alert"
@@ -16,7 +17,10 @@ const CreateCustomer = ({isOpen}) => {
     e.preventDefault()
     setLoading(true)
     setAlert(true)
-    await axios.post('http://127.0.0.1:8000/api/customers',{nama,kode,telp},{headers:{Authorization:'Bearer '+token}})
+    await instance({
+      url:'/customers',
+      data:{nama,kode,telp}  
+    })
     .then((result) => {
       setLoading(false)
       isOpen(false)

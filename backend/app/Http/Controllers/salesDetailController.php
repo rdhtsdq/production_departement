@@ -15,7 +15,7 @@ class salesDetailController extends Controller
      */
     public function index()
     {
-        $sales_detail = sales_detail::all();
+        $sales_detail = sales_detail::with(['barang','sales.customer'])->latest()->get();
 
         return response()->json([
             "message" => "all data sales detail",

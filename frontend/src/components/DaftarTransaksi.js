@@ -1,8 +1,7 @@
-import {useSelector,useDispatch} from 'react-redux'
+import {useDispatch} from 'react-redux'
 import { useState,useEffect } from 'react'
 import { create } from '../store/SalesStore'
-import token from '../LocalToken'
-import axios from 'axios'
+import instance from '../api'
 
 const DaftarTransaksi = ({data}) => {
   const [sales, setSales] = useState({})
@@ -10,13 +9,18 @@ const DaftarTransaksi = ({data}) => {
   const setData = (data) => setSales(data)
   useEffect(() => {
     return async() => {
-      const result =await axios.get('http://127.0.0.1:8000/api/sales_detail',{ headers:{Authorization : `Bearer ${token}`} } )
-      setData(result.data.data)
-      dispatch(create(result.data.data))
+      await instance({
+        url:'sales_detail',
+        method:'get'
+      })
+      .then((result) => {
+        setData(result.data)
+        dispatch(create(result.data.data))
+      }).catch((e) => {
+        console.log(e);
+      })
     }
   }, [])
-
-  console.log(useSelector(state => state.sales))
   // const ReturnData = Array(sales).map((sale,index) => <tr key={index}>
   //   <td className="p-3 text-sm text-gray-700 whitespace-nowrap">{index}</td>
   //   <td className="p-3 text-sm text-gray-700 whitespace-nowrap"></td>

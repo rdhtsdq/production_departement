@@ -1,8 +1,8 @@
-import axios from "axios";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { login } from "../store/LoginStore";
+import instance from "../api";
 // import RegisterForm from "./RegisterFrom";
 
 const LoginForm = ({isOpen}) => {
@@ -15,17 +15,23 @@ const LoginForm = ({isOpen}) => {
   const LoginAction = async(e) => {
     e.preventDefault()
     const data = await {email,password}
-    const result = await axios.post('http://127.0.0.1:8000/api/login',data)
-    const token = result.data.access_token
-    const auth = result.data.auth
-    const isAuth = {token,auth}
-    if (token && auth) {
-      dispatch(login(isAuth))
-      navigate("/dashboard")
-    }else{
-      await setError(() => result.data.message)
-      console.log(error)
-    }
+    await instance({
+      url:"/login",
+      method:"post",
+      data:data
+    })
+    .then((result) => {
+      console.log(result);
+      const token = result.data.access_token
+      const auth = result.data.auth
+      const isAuth = {token,auth}
+      if (token && auth) {
+        dispatch(login(isAuth))
+        navigate("/dashboard")
+      }
+    }).catch((e) => {
+      console.log(e);
+    })
   }
 
   return <div>

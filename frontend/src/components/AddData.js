@@ -12,8 +12,8 @@ const AddData = () => {
   const [nama,setNama] = useState('')
   const [kode,setKode] = useState('')
   const [telp,setTelp] = useState('')
+  const [cust_id,setCustId] = useState('')
   const custstate = useSelector((state) => state.cust_id)
-  const [cust_id,setCustNasi] = useState('')
   const [allCust,setAllCust] = useState({})
   const dispatch = useDispatch()
   const [isloading,setIsLoading] = useState(false)
@@ -21,18 +21,13 @@ const AddData = () => {
     await e.preventDefault()
   }
 
-  const chageValue = async(param) => {
-    setNama('')
-    setKode('')
-    setTelp('')
-    setNama(param.value.nama)
-    setKode(param.value.kode)
-    setTelp(param.value.telp)
-  }
 
   useEffect(() => {
-    // chageValue(custstate)
-  }, [custstate])
+    setNama(custstate.value.nama)
+    setKode(custstate.value.kode)
+    setTelp(custstate.value.telp)
+    setCustId(custstate.value.id)
+  }, [modal])
 
   useEffect(() => {
     // chageValue(custstate)
@@ -58,9 +53,10 @@ const AddData = () => {
         <section className="form">
           <h1 className="form-section-title">Customer</h1>
           <div className="form-input">
-            <div className="btn bg-blue-500 text-white cursor-pointer" onClick={() => setModal(true)}>Pilih Customer</div>
-            <div className="space-y-5">
+            {(!custstate.value.id == cust_id) ? <div className="btn bg-blue-500 text-white cursor-pointer" onClick={() => setModal(true)}>Pilih Customer</div>
+             :  <div className="space-y-5">
               <div className='space-x-2 flex items-center'>
+                <input type="hidden" value={cust_id}  />
                 <label htmlFor="nama">Nama</label>
                 <input readOnly value={nama} onChange={e => setNama(e.target.value)} type="text" id="nama" className="input cursor-default" />
               </div>
@@ -72,8 +68,12 @@ const AddData = () => {
                 <label htmlFor="tlp">Telepon</label>
                 <input readOnly type="text" id='tlp' className='input cursor-default' value={telp} onChange={e => setTelp(e.target.value)}/>
               </div>
-              <input type="hidden" />
+              <div className="flex">
+                <div className="btn bg-blue-500 text-white cursor-pointer" onClick={() => setModal(true)}>Ubah</div>
+              </div>
             </div>
+            
+} 
             <div className="space-y-5">
             </div>
           </div>
