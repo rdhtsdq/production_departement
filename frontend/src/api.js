@@ -4,7 +4,7 @@ import token from './LocalToken'
 
 let instance = axios.create({
   withCredentials:true,
-  baseURL : "http://backend-in-nventory.herokuapp.com/api"
+  baseURL : "http://127.0.0.1:8000/api"
 })
 
 instance.interceptors.request.use((request) => {
