@@ -1,4 +1,4 @@
-const AddDataBarang = () => {
+const AddDataBarang = ({ismodalopen}) => {
   return <div>
     hi
   </div>

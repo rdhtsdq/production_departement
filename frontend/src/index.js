@@ -14,13 +14,15 @@ import LoginStore from './store/LoginStore';
 import SalesStore from './store/SalesStore';
 import CustomerStore from './store/CustomerStore';
 import Cust_id from './store/Customer_id';
+import ProductsStore from './store/ProductsStore';
 
 const store = configureStore({
   reducer :{
     login:LoginStore,
     sales:SalesStore,
     customer:CustomerStore,
-    cust_id:Cust_id
+    cust_id:Cust_id,
+    product:ProductsStore
   }
 })
 
@@ -32,7 +34,9 @@ root.render(
   <React.StrictMode>
     <Provider store={store}>
       <BrowserRouter >
-        <App />
+        
+          <App />
+        
       </BrowserRouter>
     </Provider>
   </React.StrictMode>

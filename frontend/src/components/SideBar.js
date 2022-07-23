@@ -1,4 +1,4 @@
-import { useSelector,useDispatch } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import {NavLink} from 'react-router-dom'
 import instance from '../api'
 import { useNavigate } from 'react-router-dom'
@@ -10,7 +10,7 @@ const SideBar = () => {
   const Active = ({isActive}) => {
     let classname = ''
     if (isActive) {
-      return classname += 'font-bold border-r-4'
+      return classname += 'font-bold'
     }else{
       return 'pl-2'
     }
@@ -20,6 +20,7 @@ const SideBar = () => {
     await instance({
       url:"/logout",
       method:"post",
+      data:{}
     })
   }
   const handleLogout = async(e) => {

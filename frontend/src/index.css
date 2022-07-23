@@ -3,6 +3,7 @@
 @tailwind utilities;
 
 @import url('https://fonts.googleapis.com/css2?family=Edu+NSW+ACT+Foundation:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&family=Quicksand:wght@300;400;500;600;700&display=swap');
 
 @layer components{
   .input{
@@ -14,6 +15,7 @@
 
   .logo {
     font-family:'Edu NSW ACT Foundation', cursive;
+    /* font-family:'Playfair Display' , serif; */
   }
 
   .form-input {
@@ -24,5 +26,14 @@
   }
   .form-section-title {
     @apply px-4 py-2 bg-blue-100 mb-4
+  }
+}
+
+@layer base {
+  html {
+    font-family:'Quicksand' , sans-serif;
+  }
+  input {
+    @apply text-gray-700
   }
 }

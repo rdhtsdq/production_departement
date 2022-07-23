@@ -1,9 +1,10 @@
 import axios from "axios";
-import token from "./LocalToken";
+import token from './LocalToken'
+
 
 let instance = axios.create({
   withCredentials:true,
-  baseURL : "http://127.0.0.1:8000/api"
+  baseURL : "http://backend-in-nventory.herokuapp.com/api"
 })
 
 instance.interceptors.request.use((request) => {

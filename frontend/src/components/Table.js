@@ -34,7 +34,6 @@ const Table = ({obj,close}) => {
                     <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                       <div className=" flex space-x-3">
                         <button type="button" onClick={() => getCustById(data)} className=" p-2 rounded-md bg-green-500 text-white">Pilih</button>
-                        <button type="button" className="bg-blue-500 text-white p-2 rounded-md ">Edit</button>
                       </div>
                     </td>
                     <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
